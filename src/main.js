@@ -1,5 +1,7 @@
 "use strict";
 
+const TASK_CARD_COUNT = 3;
+
 const createPageMenuTemplate = () => {
   return `<section class="control__btn-wrap">
           <input type="radio" name="control" id="control__new-task" class="control__input visually-hidden">
@@ -329,4 +331,18 @@ const renderTemplate = (container, template, place) => {
 
 const pageMainElement = document.querySelector(`.main`);
 const pageHeaderElement = pageMainElement.querySelector(`.main__control`);
+
 renderTemplate(pageHeaderElement, createPageMenuTemplate(), `beforeend`);
+renderTemplate(pageMainElement, createFilterTemplate(), `beforeend`);
+renderTemplate(pageMainElement, createTaskBoardTemplate(), `beforeend`);
+
+const taskBoardElement = pageMainElement.querySelector(`.board`);
+const taskListElement = taskBoardElement.querySelector(`.board__tasks`);
+
+renderTemplate(taskListElement, createTaskEditCardTemplate(), `beforeend`);
+
+for (let i = 0; i < TASK_CARD_COUNT; i++) {
+  renderTemplate(taskListElement, createTaskCardTemplate(), `beforeend`);
+}
+
+renderTemplate(taskBoardElement, createLoadMoreButtonTemplate(), `beforeend`);
