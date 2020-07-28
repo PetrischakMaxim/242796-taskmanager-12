@@ -10,3 +10,11 @@ const createPageMenuTemplate = () => {
           <label for="control__statistic" class="control__label">STATISTICS</label>
         </section>`;
 };
+
+const renderTemplate = (container, template, place) => {
+  container.insertAdjacentHTML(place, template);
+};
+
+const pageMainElement = document.querySelector(`.main`);
+const pageHeaderElement = pageMainElement.querySelector(`.main__control`);
+renderTemplate(pageHeaderElement, createPageMenuTemplate(), `beforeend`);
