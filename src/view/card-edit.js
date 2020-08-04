@@ -1,18 +1,6 @@
-const isExpired = (dueDate) => {
-  if (dueDate === null) {
-    return false;
-  }
+import {COLORS} from "../const.js";
+import {isExpired, isRepeating} from "../utils";
 
-  const currentDate = new Date();
-
-  currentDate.setHours(23, 59, 59, 999);
-
-  return currentDate > dueDate.getTime();
-};
-
-const isRepeating = (repeating) => {
-  return Object.values(repeating).some(Boolean);
-};
 
 const createTaskEditRepeatingTemplate = (repeating) => {
   return `<button class="card__repeat-toggle" type="button">
@@ -56,9 +44,8 @@ const createTaskEditDateTemplate = (dueDate) => {
 };
 
 const createTaskEditColorsTemplate = (currentColor) => {
-  const colors = [`black`, `yellow`, `blue`, `green`, `pink`];
 
-  return colors.map((color) => `<input
+  return COLORS.map((color) => `<input
     type="radio"
     id="color-${color}"
     class="card__color-input card__color-input--${color} visually-hidden"

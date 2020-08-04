@@ -6,7 +6,6 @@ import {createTaskEditCardTemplate} from "./view/card-edit";
 import {createLoadMoreButtonTemplate} from "./view/load-more-button";
 import {generateTask} from "./mock/task";
 
-
 const TASK_CARD_COUNT = 4;
 
 const tasks = new Array(TASK_CARD_COUNT).fill().map(generateTask);

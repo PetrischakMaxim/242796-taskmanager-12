@@ -1,18 +1,4 @@
-const isExpired = (dueDate) => {
-  if (dueDate === null) {
-    return false;
-  }
-
-  let currentDate = new Date();
-  currentDate.setHours(23, 59, 59, 999);
-  currentDate = new Date(currentDate);
-
-  return currentDate.getTime() > dueDate.getTime();
-};
-
-const isRepeating = (repeating) => {
-  return Object.values(repeating).some(Boolean);
-};
+import {isExpired, isRepeating} from "../utils";
 
 export const createTaskCardTemplate = (task) => {
   const {color, description, dueDate, repeating, isArchive, isFavorite} = task;
