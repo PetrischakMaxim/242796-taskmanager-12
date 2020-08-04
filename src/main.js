@@ -7,9 +7,10 @@ import {createLoadMoreButtonTemplate} from "./view/load-more-button";
 import {generateTask} from "./mock/task";
 
 
-const TASK_CARD_COUNT = 3;
+const TASK_CARD_COUNT = 4;
 
 const tasks = new Array(TASK_CARD_COUNT).fill().map(generateTask);
+const editTaskTemplate = tasks[0];
 
 const renderTemplate = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
@@ -25,9 +26,10 @@ renderTemplate(pageMainElement, createTaskBoardTemplate(), `beforeend`);
 const taskBoardElement = pageMainElement.querySelector(`.board`);
 const taskListElement = taskBoardElement.querySelector(`.board__tasks`);
 
-renderTemplate(taskListElement, createTaskEditCardTemplate(), `beforeend`);
 
-for (let i = 0; i < TASK_CARD_COUNT; i++) {
+renderTemplate(taskListElement, createTaskEditCardTemplate(editTaskTemplate), `beforeend`);
+
+for (let i = 1; i < TASK_CARD_COUNT; i++) {
   renderTemplate(taskListElement, createTaskCardTemplate(tasks[i]), `beforeend`);
 }
 
