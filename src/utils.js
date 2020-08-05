@@ -7,7 +7,7 @@ export const getRandomInteger = (a = 0, b = 1) => {
   return Math.floor(lower + Math.random() * (upper - lower + 1));
 };
 
-export const isExpired = (dueDate) => {
+export const isTaskExpired = (dueDate) => {
   if (dueDate === null) {
     return false;
   }
@@ -19,6 +19,10 @@ export const isExpired = (dueDate) => {
   return currentDate > dueDate.getTime();
 };
 
-export const isRepeating = (repeating) => {
+export const isTaskRepeating = (repeating) => {
   return Object.values(repeating).some(Boolean);
+};
+
+export const humanizeTaskDueDate = (dueDate) => {
+  return dueDate.toLocaleString(`en-US`, {day: `numeric`, month: `long`});
 };
