@@ -7,7 +7,7 @@ import {createLoadMoreButtonTemplate} from "./view/load-more-button.js";
 import {generateTask} from "./mock/task.js";
 import {generateFilter} from "./mock/filter.js";
 
-const TASK_CARD_COUNT = 22;
+const TASK_CARD_COUNT = 12;
 const TASK_COUNT_PER_STEP = 8;
 
 const tasks = new Array(TASK_CARD_COUNT).fill().map(generateTask);
@@ -31,18 +31,27 @@ const taskListElement = taskBoardElement.querySelector(`.board__tasks`);
 
 renderTemplate(taskListElement, createTaskEditCardTemplate(editTaskTemplate), `beforeend`);
 
-for (let i = 1; i < TASK_CARD_COUNT; i++) {
+for (let i = 1; i < Math.min(tasksLenght, TASK_COUNT_PER_STEP); i++) {
   renderTemplate(taskListElement, createTaskCardTemplate(tasks[i]), `beforeend`);
 }
 
 if (tasksLenght > TASK_COUNT_PER_STEP) {
+  let renderedTaskCount = TASK_COUNT_PER_STEP;
   renderTemplate(taskBoardElement, createLoadMoreButtonTemplate(), `beforeend`);
 
   const loadMoreButton = taskBoardElement.querySelector(`.load-more`);
 
   loadMoreButton.addEventListener(`click`, (evt) => {
     evt.preventDefault();
-    alert(`Works!`);
+    tasks
+      .slice(renderedTaskCount, renderedTaskCount + TASK_COUNT_PER_STEP)
+      .forEach((task) => renderTemplate(taskListElement, createTaskCardTemplate(task), `beforeend`));
+
+    renderedTaskCount += TASK_COUNT_PER_STEP;
+
+    if (renderedTaskCount >= tasksLenght) {
+      loadMoreButton.remove();
+    }
   });
 }
 
