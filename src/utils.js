@@ -41,3 +41,5 @@ export const isTaskRepeating = (repeating) => {
 export const humanizeTaskDueDate = (dueDate) => {
   return dueDate.toLocaleString(`en-US`, {day: `numeric`, month: `long`});
 };
+
+export const getRandomIndex = (array) => array[getRandomInteger(0, array.length - 1)];
