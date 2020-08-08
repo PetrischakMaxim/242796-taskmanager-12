@@ -1,20 +1,6 @@
-import {isTaskExpired, isTaskRepeating} from "../utils.js";
+import {taskToFilterMap} from "../data/task/task.js";
 
-const taskToFilterMap = {
-  all: (tasks) => tasks.filter((task) => !task.isArchive).length,
-  overdue: (tasks) => tasks
-    .filter((task) => !task.isArchive)
-    .filter((task) => isTaskExpired(task.dueDate)).length,
-  favorites: (tasks) => tasks
-    .filter((task) => !task.isArchive)
-    .filter((task) => task.isFavorite).length,
-  repeating: (tasks) => tasks
-    .filter((task) => !task.isArchive)
-    .filter((task) => isTaskRepeating(task.repeating)).length,
-  archive: (tasks) => tasks.filter((task) => task.isArchive).length,
-};
-
-export const generateFilter = (tasks) => {
+export const generateFilters = (tasks) => {
   return Object.entries(taskToFilterMap).map(([filterName, countTasks]) => {
     return {
       name: filterName,
