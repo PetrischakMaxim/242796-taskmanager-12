@@ -1,9 +1,11 @@
-import {createPageMenuTemplate} from "./view/page-menu.js";
-import {createFilterTemplate} from "./view/filter.js";
-import {createTaskBoardTemplate} from "./view/task-board.js";
-import {createTaskCardTemplate} from "./view/card.js";
-import {createTaskEditCardTemplate} from "./view/card-edit.js";
-import {createLoadMoreButtonTemplate} from "./view/load-more-button.js";
+import {
+  createPageMenuTemplate,
+  createFilterTemplate,
+  createTaskBoardTemplate,
+  createTaskCardTemplate,
+  createTaskEditCardTemplate,
+  createLoadMoreButtonTemplate} from "./components/index.js";
+
 import {generateTask} from "./mock/task.js";
 import {generateFilters} from "./mock/filter.js";
 

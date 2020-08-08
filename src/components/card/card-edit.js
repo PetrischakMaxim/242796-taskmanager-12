@@ -1,6 +1,5 @@
-import {COLORS} from "../const.js";
-import {isTaskExpired, isTaskRepeating, humanizeTaskDueDate} from "../utils";
-
+import {COLORS} from "../../const.js";
+import {isTaskExpired, isTaskRepeating, humanizeTaskDueDate} from "./index.js";
 
 const createTaskEditRepeatingTemplate = (repeating) => {
   return `<button class="card__repeat-toggle" type="button">
@@ -22,7 +21,6 @@ const createTaskEditRepeatingTemplate = (repeating) => {
     </div>
   </fieldset>` : ``}`;
 };
-
 
 const createTaskEditDateTemplate = (dueDate) => {
   return `<button class="card__date-deadline-toggle" type="button">
