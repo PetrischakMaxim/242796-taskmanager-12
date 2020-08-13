@@ -1,5 +1,4 @@
 import {
-  createFilterTemplate,
   createTaskCardTemplate,
   createTaskEditCardTemplate} from "./components/index.js";
 
@@ -8,6 +7,7 @@ import LoadMoreButtonView from "./components/load-more-button/load-more-button.j
 import TaskBoardView from "./components/task/task-board.js";
 import TaskListView from "./components/task/task-list.js";
 import SortView from "./components/sort/sort.js";
+import FilterView from "./components/filter/filter.js";
 
 import {generateTask} from "./mock/task.js";
 import {generateFilters} from "./mock/filter.js";
@@ -27,7 +27,7 @@ const pageMainElement = document.querySelector(`.main`);
 const pageHeaderElement = pageMainElement.querySelector(`.main__control`);
 
 renderElement(pageHeaderElement, new PageMenuView().getElement(), BEFOREEND);
-renderTemplate(pageMainElement, createFilterTemplate(filters), BEFOREEND);
+renderElement(pageMainElement, new FilterView(filters).getElement(), BEFOREEND);
 
 const boardComponent = new TaskBoardView();
 renderElement(pageMainElement, boardComponent.getElement(), BEFOREEND);
