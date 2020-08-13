@@ -1,62 +1,8 @@
-import {COLORS, BLANK_TASK} from "../../const.js";
-import {isTaskExpired, isTaskRepeating, humanizeTaskDueDate, createElement} from "../../utils.js";
-
-const createTaskEditRepeatingTemplate = (repeating) => {
-  return `<button class="card__repeat-toggle" type="button">
-    repeat:<span class="card__repeat-status">${isTaskRepeating(repeating) ? `yes` : `no`}</span>
-  </button>
-  ${isTaskRepeating(repeating) ? `<fieldset class="card__repeat-days">
-    <div class="card__repeat-days-inner">
-      ${Object.entries(repeating).map(([day, repeat]) => `<input
-        class="visually-hidden card__repeat-day-input"
-        type="checkbox"
-        id="repeat-${day}"
-        name="repeat"
-        value="${day}"
-        ${repeat ? `checked` : ``}
-      />
-      <label class="card__repeat-day" for="repeat-${day}"
-        >${day}</label
-      >`).join(``)}
-    </div>
-  </fieldset>` : ``}`;
-};
-
-const createTaskEditDateTemplate = (dueDate) => {
-  return `<button class="card__date-deadline-toggle" type="button">
-      date: <span class="card__date-status">${dueDate !== null ? `yes` : `no`}</span>
-    </button>
-    ${dueDate !== null ?
-    `<fieldset class="card__date-deadline">
-      <label class="card__input-deadline-wrap">
-        <input
-          class="card__date"
-          type="text"
-          placeholder=""
-          name="date"
-          value="${humanizeTaskDueDate(dueDate)}"
-        />
-      </label>
-    </fieldset>` : ``}
-  `;
-};
-
-const createTaskEditColorsTemplate = (currentColor) => {
-
-  return COLORS.map((color) => `<input
-    type="radio"
-    id="color-${color}"
-    class="card__color-input card__color-input--${color} visually-hidden"
-    name="color"
-    value="${color}"
-    ${currentColor === color ? `checked` : ``}
-  />
-  <label
-    for="color-${color}"
-    class="card__color card__color--${color}"
-    >${color}</label
-  >`).join(``);
-};
+import {BLANK_TASK} from "../../const.js";
+import {isTaskExpired, isTaskRepeating, createElement} from "../../utils.js";
+import {createTaskEditRepeatingTemplate} from "./task-edit-repeating.js";
+import {createTaskEditDateTemplate} from "./task-edit-repeating.js";
+import {createTaskEditColorsTemplate} from "./task-edit-colors.js";
 
 const createTaskEditCardTemplate = (task) => {
   const {
