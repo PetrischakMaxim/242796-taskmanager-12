@@ -1,8 +1,7 @@
 
-import {createFilterTemplate} from "./filter/filter.js";
-import {createTaskCardTemplate, createTaskEditCardTemplate} from "./card/index.js";
+import {createTaskCardTemplate} from "./task/task.js";
+import {createTaskEditCardTemplate} from "./task/task-edit.js";
 
 export {
-  createFilterTemplate,
   createTaskCardTemplate,
   createTaskEditCardTemplate};
