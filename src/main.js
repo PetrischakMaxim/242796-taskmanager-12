@@ -9,6 +9,8 @@ import {
 import {generateTask} from "./mock/task.js";
 import {generateFilters} from "./mock/filter.js";
 
+import {renderTemplate} from "./utils.js";
+
 const TASK_CARD_COUNT = 12;
 const TASK_COUNT_PER_STEP = 8;
 
@@ -16,10 +18,6 @@ const tasks = new Array(TASK_CARD_COUNT).fill().map(generateTask);
 const {length: taskLength} = tasks;
 const editTaskTemplate = tasks[0];
 const filters = generateFilters(tasks);
-
-const renderTemplate = (container, template, place) => {
-  container.insertAdjacentHTML(place, template);
-};
 
 const pageMainElement = document.querySelector(`.main`);
 const pageHeaderElement = pageMainElement.querySelector(`.main__control`);
