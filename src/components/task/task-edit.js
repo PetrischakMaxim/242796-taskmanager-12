@@ -1,7 +1,7 @@
 import {BLANK_TASK} from "../../const.js";
 import {isTaskExpired, isTaskRepeating, createElement} from "../../utils.js";
 import {createTaskEditRepeatingTemplate} from "./task-edit-repeating.js";
-import {createTaskEditDateTemplate} from "./task-edit-repeating.js";
+import {createTaskEditDateTemplate} from "./task-edit-date.js";
 import {createTaskEditColorsTemplate} from "./task-edit-colors.js";
 
 const createTaskEditCardTemplate = (task) => {
