@@ -1,7 +1,7 @@
 import {COLORS} from "../const.js";
 import {TASK_DESCRIPTIONS} from "../const.js";
-import {getRandomInteger} from "../utils.js";
-import {getRandomIndex} from "../utils.js";
+import {getRandomInteger} from "../utils/utils.js";
+import {getRandomIndex} from "../utils/utils.js";
 
 const generateDate = () => {
 

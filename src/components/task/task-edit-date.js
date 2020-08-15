@@ -1,4 +1,4 @@
-import {humanizeTaskDueDate} from "../../utils.js";
+import {humanizeTaskDueDate} from "../../utils/utils.js";
 
 export const createTaskEditDateTemplate = (dueDate) => {
   return `<button class="card__date-deadline-toggle" type="button">
