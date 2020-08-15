@@ -28,8 +28,8 @@ const renderTask = (taskListElement, task) => {
   const taskComponent = new TaskView(task);
   const taskEditComponent = new TaskEditView(task);
 
-  const replaceTaskState = (oldElement, newElement) => {
-    taskListElement.replaceChild(oldElement.getElement(), newElement.getElement());
+  const replaceTaskState = (newElement, oldElement) => {
+    taskListElement.replaceChild(newElement.getElement(), oldElement.getElement());
   };
 
   taskComponent.getElement()
