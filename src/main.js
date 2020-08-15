@@ -32,10 +32,19 @@ const renderTask = (taskListElement, task) => {
     taskListElement.replaceChild(newElement.getElement(), oldElement.getElement());
   };
 
+  const onEscKeyDown = (evt) => {
+    if (evt.key === `Escape` || evt.key === `Esc`) {
+      evt.preventDefault();
+      replaceTaskState(taskComponent, taskEditComponent);
+      document.removeEventListener(`keydown`, onEscKeyDown);
+    }
+  };
+
   taskComponent.getElement()
     .querySelector(`.card__btn--edit`)
     .addEventListener(`click`, () => {
       replaceTaskState(taskEditComponent, taskComponent);
+      document.addEventListener(`keydown`, onEscKeyDown);
     });
 
   taskEditComponent.getElement()
@@ -43,6 +52,7 @@ const renderTask = (taskListElement, task) => {
     .addEventListener(`submit`, (evt) => {
       evt.preventDefault();
       replaceTaskState(taskComponent, taskEditComponent);
+      document.addEventListener(`keydown`, onEscKeyDown);
     });
 
   render(taskListElement, taskComponent.getElement(), BEFOREEND);
@@ -82,4 +92,3 @@ if (taskLength > TASK_COUNT_PER_STEP) {
     }
   });
 }
-
