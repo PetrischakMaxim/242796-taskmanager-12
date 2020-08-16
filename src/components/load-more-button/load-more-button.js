@@ -1,4 +1,4 @@
-import {createElement} from "../../utils.js";
+import {createElement} from "../../utils/dom-utils.js";
 
 const createLoadMoreButtonTemplate = () => {
   return `<button class="load-more" type="button">load more</button>`;

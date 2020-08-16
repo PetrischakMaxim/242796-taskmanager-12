@@ -1,5 +1,6 @@
 import {BLANK_TASK} from "../../const.js";
-import {isTaskExpired, isTaskRepeating, createElement} from "../../utils.js";
+import {isTaskExpired, isTaskRepeating} from "../../utils/utils.js";
+import {createElement} from "../../utils/dom-utils.js";
 import {createTaskEditRepeatingTemplate} from "./task-edit-repeating.js";
 import {createTaskEditDateTemplate} from "./task-edit-date.js";
 import {createTaskEditColorsTemplate} from "./task-edit-colors.js";

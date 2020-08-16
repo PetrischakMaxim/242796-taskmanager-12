@@ -1,6 +1,6 @@
-import {createElement} from "../../utils.js";
+import {createElement} from "../../utils/dom-utils.js";
 
-const createPageMenuTemplate = () => {
+const createMenuTemplate = () => {
   return `<section class="control__btn-wrap">
           <input type="radio" name="control" id="control__new-task" class="control__input visually-hidden">
           <label for="control__new-task" class="control__label control__label--new-task">+ ADD NEW TASK</label>
@@ -11,20 +11,19 @@ const createPageMenuTemplate = () => {
         </section>`;
 };
 
-export default class PageMenu {
+export default class Menu {
   constructor() {
     this._element = null;
   }
 
   getTemplate() {
-    return createPageMenuTemplate();
+    return createMenuTemplate();
   }
 
   getElement() {
     if (!this._element) {
       this._element = createElement(this.getTemplate());
     }
-
     return this._element;
   }
 

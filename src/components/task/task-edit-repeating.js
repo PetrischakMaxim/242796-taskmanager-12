@@ -1,4 +1,4 @@
-import {isTaskRepeating} from "../../utils.js";
+import {isTaskRepeating} from "../../utils/utils.js";
 
 export const createTaskEditRepeatingTemplate = (repeating) => {
   return `<button class="card__repeat-toggle" type="button">

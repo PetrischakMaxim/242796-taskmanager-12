@@ -1,4 +1,5 @@
-import {isTaskExpired, isTaskRepeating, humanizeTaskDueDate, createElement} from "../../utils.js";
+import {isTaskExpired, isTaskRepeating, humanizeTaskDueDate} from "../../utils/utils.js";
+import {createElement} from "../../utils/dom-utils.js";
 
 export const createTaskCardTemplate = (task) => {
   const {color, description, dueDate, repeating, isArchive, isFavorite} = task;

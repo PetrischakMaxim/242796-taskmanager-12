@@ -1,16 +1,18 @@
 import {createElement} from "../../utils/dom-utils.js";
 
-const createTaskListTemplate = () => {
-  return `<div class="board__tasks"></div>`;
+const createNoTaskTemplate = () => {
+  return `<p class="board__no-tasks">
+    Click «ADD NEW TASK» in menu to create your first task
+  </p>`;
 };
 
-export default class TaskList {
+export default class NoTask {
   constructor() {
     this._element = null;
   }
 
   getTemplate() {
-    return createTaskListTemplate();
+    return createNoTaskTemplate();
   }
 
   getElement() {
