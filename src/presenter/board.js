@@ -57,11 +57,18 @@ export default class Board {
     }
 
     this._sortTasks(sortType);
+    this._clearTaskList();
+    this._renderTaskList();
   }
 
   _renderSort() {
     render(this._boardComponent, this._sortComponent, RenderPosition.AFTERBEGIN);
     this._sortComponent.setSortTypeChangeHandler(this._handleSortTypeChange);
+  }
+
+  _clearTaskList() {
+    this._taskListComponent.getElement().innerHTML = ``;
+    this._renderedTaskCount = TASK_COUNT_PER_STEP;
   }
 
   _renderTask(task) {
