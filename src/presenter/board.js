@@ -7,25 +7,28 @@ import SortView from "../components/sort/sort.js";
 import LoadMoreButtonView from "../components/load-more-button/load-more-button.js";
 
 import {render, RenderPosition, replace, remove} from "../utils/dom-utils.js";
-
-const TASK_COUNT_PER_STEP = 8;
+import {TASK_COUNT_PER_STEP} from '../const.js';
 
 export default class Board {
   constructor(boardContainer) {
     this._boardContainer = boardContainer;
+    this._renderedTaskCount = TASK_COUNT_PER_STEP;
 
     this._boardComponent = new TaskBoardView();
     this._sortComponent = new SortView();
     this._taskListComponent = new TaskListView();
     this._noTaskComponent = new NoTaskView();
+    this._loadMoreButtonComponent = new LoadMoreButtonView();
+
+    this._handleLoadMoreButtonClick = this._handleLoadMoreButtonClick.bind(this);
   }
 
   init(boardTasks) {
-
     this._boardTasks = [...boardTasks];
-    console.log([...boardTasks]);
+
     render(this._boardContainer, this._boardComponent);
     render(this._boardComponent, this._taskListComponent);
+
     this._renderBoard();
   }
 
@@ -76,23 +79,22 @@ export default class Board {
     render(this._boardComponent, this._noTaskComponent, RenderPosition.AFTERBEGIN);
   }
 
-  _renderLoadMoreButton() {
-    let renderedTaskCount = TASK_COUNT_PER_STEP;
-    const loadMoreButtonComponent = new LoadMoreButtonView();
+  _handleLoadMoreButtonClick() {
 
-    render(this._boardComponent, loadMoreButtonComponent);
+    this._loadMoreButtonComponent.setClickHandler(() => {
+      this._renderTasks(this._renderedTaskCount, this._renderedTaskCount + TASK_COUNT_PER_STEP);
 
-    loadMoreButtonComponent.setClickHandler(() => {
-      this._boardTasks
-        .slice(renderedTaskCount, renderedTaskCount + TASK_COUNT_PER_STEP)
-        .forEach((boardTask) => this._renderTask(boardTask));
+      this._renderedTaskCount += TASK_COUNT_PER_STEP;
 
-      renderedTaskCount += TASK_COUNT_PER_STEP;
-
-      if (renderedTaskCount >= this._boardTasks.length) {
-        remove(loadMoreButtonComponent);
+      if (this._renderedTaskCount >= this._boardTasks.length) {
+        remove(this._loadMoreButtonComponent);
       }
     });
+  }
+
+  _renderLoadMoreButton() {
+    render(this._boardComponent, this._loadMoreButtonComponent);
+    this._loadMoreButtonComponent.setClickHandler(this._handleLoadMoreButtonClick);
   }
 
   _renderTaskList() {
