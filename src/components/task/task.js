@@ -1,5 +1,5 @@
 import {isTaskExpired, isTaskRepeating, humanizeTaskDueDate} from "../../utils/utils.js";
-import {createElement} from "../../utils/dom-utils.js";
+import AbstractView from "../abstract.js";
 
 export const createTaskCardTemplate = (task) => {
   const {color, description, dueDate, repeating, isArchive, isFavorite} = task;
@@ -65,26 +65,13 @@ export const createTaskCardTemplate = (task) => {
     </article>`;
 };
 
-export default class Task {
+export default class Task extends AbstractView {
   constructor(task) {
+    super();
     this._task = task;
-
-    this._element = null;
   }
 
   getTemplate() {
     return createTaskCardTemplate(this._task);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

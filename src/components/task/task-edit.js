@@ -1,9 +1,9 @@
 import {BLANK_TASK} from "../../const.js";
 import {isTaskExpired, isTaskRepeating} from "../../utils/utils.js";
-import {createElement} from "../../utils/dom-utils.js";
 import {createTaskEditRepeatingTemplate} from "./task-edit-repeating.js";
 import {createTaskEditDateTemplate} from "./task-edit-date.js";
 import {createTaskEditColorsTemplate} from "./task-edit-colors.js";
+import AbstractView from "../abstract.js";
 
 const createTaskEditCardTemplate = (task) => {
   const {
@@ -65,25 +65,14 @@ const createTaskEditCardTemplate = (task) => {
     </article>`;
 };
 
-export default class TaskEdit {
+export default class TaskEdit extends AbstractView {
   constructor(task) {
+    super();
     this._task = task || BLANK_TASK;
-    this._element = null;
   }
 
   getTemplate() {
     return createTaskEditCardTemplate(this._task);
   }
 
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
-  }
 }
