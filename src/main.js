@@ -39,20 +39,15 @@ const renderTask = (taskListElement, task) => {
     }
   };
 
-  taskComponent.getElement()
-    .querySelector(`.card__btn--edit`)
-    .addEventListener(`click`, () => {
-      replaceTaskState(taskEditComponent, taskComponent);
-      document.addEventListener(`keydown`, onEscKeyDown);
-    });
+  taskComponent.setEditClickHandler(() => {
+    replaceTaskState(taskEditComponent, taskComponent);
+    document.addEventListener(`keydown`, onEscKeyDown);
+  });
 
-  taskEditComponent.getElement()
-    .querySelector(`form`)
-    .addEventListener(`submit`, (evt) => {
-      evt.preventDefault();
-      replaceTaskState(taskComponent, taskEditComponent);
-      document.addEventListener(`keydown`, onEscKeyDown);
-    });
+  taskEditComponent.setFormSubmitHandler(() => {
+    replaceTaskState(taskComponent, taskEditComponent);
+    document.addEventListener(`keydown`, onEscKeyDown);
+  });
 
   render(taskListElement, taskComponent.getElement());
 };
@@ -82,18 +77,16 @@ if (tasks.every((task) => task.isArchive)) {
 
     render(boardComponent.getElement(), loadMoreButtonComponent.getElement());
 
-    loadMoreButtonComponent.getElement()
-      .addEventListener(`click`, (evt) => {
-        evt.preventDefault();
-        tasks
+    loadMoreButtonComponent.setClickHandler(() => {
+      tasks
           .slice(renderedTaskCount, renderedTaskCount + TASK_COUNT_PER_STEP)
           .forEach((task) => renderTask(taskListComponent.getElement(), task));
 
-        renderedTaskCount += TASK_COUNT_PER_STEP;
-        if (renderedTaskCount >= tasksAmount) {
-          loadMoreButtonComponent.getElement().remove();
-          loadMoreButtonComponent.removeElement();
-        }
-      });
+      renderedTaskCount += TASK_COUNT_PER_STEP;
+      if (renderedTaskCount >= tasksAmount) {
+        loadMoreButtonComponent.getElement().remove();
+        loadMoreButtonComponent.removeElement();
+      }
+    });
   }
 }
