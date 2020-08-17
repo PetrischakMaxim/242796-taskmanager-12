@@ -25,3 +25,9 @@ export const BLANK_TASK = {
 };
 
 export const TASK_COUNT_PER_STEP = 8;
+
+export const SortType = {
+  DEFAULT: `default`,
+  DATE_DOWN: `date-down`,
+  DATE_UP: `date-up`
+};
