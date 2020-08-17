@@ -23,3 +23,5 @@ export const BLANK_TASK = {
   isArchive: false,
   isFavorite: false
 };
+
+export const TASK_COUNT_PER_STEP = 8;
