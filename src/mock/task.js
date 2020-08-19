@@ -1,7 +1,6 @@
 import {COLORS} from "../const.js";
 import {TASK_DESCRIPTIONS} from "../const.js";
-import {getRandomInteger} from "../utils/utils.js";
-import {getRandomIndex} from "../utils/utils.js";
+import {getRandomInteger, generateId, getRandomIndex} from "../utils/utils.js";
 
 const generateDate = () => {
 
@@ -49,6 +48,7 @@ export const generateTask = () => {
     };
 
   return {
+    id: generateId(),
     description: getRandomIndex(TASK_DESCRIPTIONS),
     dueDate,
     repeating,
