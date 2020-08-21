@@ -5,13 +5,16 @@ import {render, replace, remove} from "../utils/dom-utils.js";
 
 
 export default class Task {
-  constructor(taskListContainer) {
+  constructor(taskListContainer, changeData) {
     this._taskListContainer = taskListContainer;
+    this._changeData = changeData;
 
     this._taskComponent = null;
     this._taskEditComponent = null;
 
     this._handleEditClick = this._handleEditClick.bind(this);
+    this._handleFavoriteClick = this._handleFavoriteClick.bind(this);
+    this._handleArchiveClick = this._handleArchiveClick.bind(this);
     this._handleFormSubmit = this._handleFormSubmit.bind(this);
     this._escKeyDownHandler = this._escKeyDownHandler.bind(this);
   }
@@ -26,6 +29,8 @@ export default class Task {
     this._taskEditComponent = new TaskEditView(task);
 
     this._taskComponent.setEditClickHandler(this._handleEditClick);
+    this._taskComponent.setFavoriteClickHandler(this._handleFavoriteClick);
+    this._taskComponent.setArchiveClickHandler(this._handleArchiveClick);
     this._taskEditComponent.setFormSubmitHandler(this._handleFormSubmit);
 
     if (prevTaskComponent === null || prevTaskEditComponent === null) {
@@ -66,11 +71,20 @@ export default class Task {
     }
   }
 
+  _handleFavoriteClick() {
+    this._changeData(Object.assign({}, this._task, {isFavorite: !this._task.isFavorite}));
+  }
+
+  _handleArchiveClick() {
+    this._changeData(Object.assign({}, this._task, {isArchive: !this._task.isArchive}));
+  }
+
   _handleEditClick() {
     this._replaceCardToForm();
   }
 
-  _handleFormSubmit() {
+  _handleFormSubmit(task) {
+    this._changeData(task);
     this._replaceFormToCard();
   }
 }
