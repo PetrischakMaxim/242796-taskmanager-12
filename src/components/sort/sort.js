@@ -14,6 +14,7 @@ export default class Sort extends AbstractView {
   constructor() {
     super();
 
+    this._callback = {};
     this._sortTypeChangeHandler = this._sortTypeChangeHandler.bind(this);
   }
 

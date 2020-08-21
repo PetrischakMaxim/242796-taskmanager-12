@@ -75,6 +75,7 @@ const createTaskEditTemplate = (data) => {
 export default class TaskEdit extends SmartView {
   constructor(task = BLANK_TASK) {
     super();
+    this._callback = {};
     this._data = TaskEdit.parseTaskToData(task);
 
     this._formSubmitHandler = this._formSubmitHandler.bind(this);

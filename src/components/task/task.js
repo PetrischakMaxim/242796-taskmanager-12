@@ -68,6 +68,7 @@ export const createTaskCardTemplate = (task) => {
 export default class Task extends AbstractView {
   constructor(task) {
     super();
+    this._callback = {};
     this._task = task;
     this._editClickHandler = this._editClickHandler.bind(this);
     this._favoriteClickHandler = this._favoriteClickHandler.bind(this);
