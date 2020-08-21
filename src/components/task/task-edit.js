@@ -70,10 +70,85 @@ export default class TaskEdit extends AbstractView {
     super();
     this._task = task || BLANK_TASK;
     this._formSubmitHandler = this._formSubmitHandler.bind(this);
+    this._descriptionInputHandler = this._descriptionInputHandler.bind(this);
+    this._dueDateToggleHandler = this._dueDateToggleHandler.bind(this);
+    this._repeatingToggleHandler = this._repeatingToggleHandler.bind(this);
+    this._setInnerHandlers();
+
+    this.getElement()
+      .querySelector(`.card__date-deadline-toggle`)
+      .addEventListener(`click`, this._dueDateToggleHandler);
+    this.getElement()
+      .querySelector(`.card__repeat-toggle`)
+      .addEventListener(`click`, this._repeatingToggleHandler);
   }
 
   getTemplate() {
     return createTaskEditCardTemplate(this._task);
+  }
+
+  updateData(update, justDataUpdating) {
+    if (!update) {
+      return;
+    }
+
+    this._data = Object.assign({}, this._data, update);
+
+    if (justDataUpdating) {
+      return;
+    }
+
+    this.updateElement();
+  }
+
+  updateElement() {
+    let prevElement = this.getElement();
+    const parent = prevElement.parentElement;
+    this.removeElement();
+
+    const newElement = this.getElement();
+
+    parent.replaceChild(newElement, prevElement);
+    prevElement = null;
+    this.restoreHandlers();
+  }
+
+  restoreHandlers() {
+    this._setInnerHandlers();
+    this.setFormSubmitHandler(this._callback.formSubmit);
+  }
+
+  _setInnerHandlers() {
+    this.getElement()
+      .querySelector(`.card__date-deadline-toggle`)
+      .addEventListener(`click`, this._dueDateToggleHandler);
+    this.getElement()
+      .querySelector(`.card__repeat-toggle`)
+      .addEventListener(`click`, this._repeatingToggleHandler);
+    this.getElement()
+      .querySelector(`.card__text`)
+      .addEventListener(`input`, this._descriptionInputHandler);
+  }
+
+  _descriptionInputHandler(evt) {
+    evt.preventDefault();
+    this.updateData({
+      description: evt.target.value
+    }, true);
+  }
+
+  _dueDateToggleHandler(evt) {
+    evt.preventDefault();
+    this.updateData({
+      isDueDate: !this._data.isDueDate
+    });
+  }
+
+  _repeatingToggleHandler(evt) {
+    evt.preventDefault();
+    this.updateData({
+      isRepeating: !this._data.isRepeating
+    });
   }
 
   _formSubmitHandler(evt) {
