@@ -1,4 +1,4 @@
-import {COLORS} from "../const.js";
+import {COLORS, BLANK_TASK} from "../const.js";
 import {TASK_DESCRIPTIONS} from "../const.js";
 import {getRandomInteger, generateId, getRandomIndex} from "../utils/utils.js";
 
@@ -37,15 +37,7 @@ export const generateTask = () => {
   const dueDate = generateDate();
   const repeating = dueDate === null
     ? generateRepeating()
-    : {
-      mo: false,
-      tu: false,
-      we: false,
-      th: false,
-      fr: false,
-      sa: false,
-      su: false
-    };
+    : BLANK_TASK.repeating;
 
   return {
     id: generateId(),

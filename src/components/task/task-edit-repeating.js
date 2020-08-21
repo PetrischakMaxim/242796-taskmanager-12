@@ -1,10 +1,8 @@
-import {isTaskRepeating} from "../../utils/utils.js";
-
-export const createTaskEditRepeatingTemplate = (repeating) => {
+export const createTaskEditRepeatingTemplate = (repeating, isRepeating) => {
   return `<button class="card__repeat-toggle" type="button">
-    repeat:<span class="card__repeat-status">${isTaskRepeating(repeating) ? `yes` : `no`}</span>
+    repeat:<span class="card__repeat-status">${isRepeating ? `yes` : `no`}</span>
   </button>
-  ${isTaskRepeating(repeating) ? `<fieldset class="card__repeat-days">
+  ${isRepeating ? `<fieldset class="card__repeat-days">
     <div class="card__repeat-days-inner">
       ${Object.entries(repeating).map(([day, repeat]) => `<input
         class="visually-hidden card__repeat-day-input"
