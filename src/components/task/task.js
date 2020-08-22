@@ -68,8 +68,11 @@ export const createTaskCardTemplate = (task) => {
 export default class Task extends AbstractView {
   constructor(task) {
     super();
+    this._callback = {};
     this._task = task;
     this._editClickHandler = this._editClickHandler.bind(this);
+    this._favoriteClickHandler = this._favoriteClickHandler.bind(this);
+    this._archiveClickHandler = this._archiveClickHandler.bind(this);
   }
 
   getTemplate() {
@@ -80,6 +83,31 @@ export default class Task extends AbstractView {
     evt.preventDefault();
     this._callback.editClick();
   }
+
+  _favoriteClickHandler(evt) {
+    evt.preventDefault();
+    this._callback.favoriteClick();
+  }
+
+  _archiveClickHandler(evt) {
+    evt.preventDefault();
+    this._callback.archiveClick();
+  }
+
+  setFavoriteClickHandler(callback) {
+    this._callback.favoriteClick = callback;
+    this.getElement()
+      .querySelector(`.card__btn--favorites`)
+      .addEventListener(`click`, this._favoriteClickHandler);
+  }
+
+  setArchiveClickHandler(callback) {
+    this._callback.archiveClick = callback;
+    this.getElement()
+      .querySelector(`.card__btn--archive`)
+      .addEventListener(`click`, this._archiveClickHandler);
+  }
+
   setEditClickHandler(callback) {
     this._callback.editClick = callback;
     this.getElement()
