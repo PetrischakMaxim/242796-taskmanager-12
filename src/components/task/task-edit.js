@@ -74,7 +74,7 @@ const createTaskEditTemplate = (data) => {
 export default class TaskEdit extends SmartView {
   constructor(task = BLANK_TASK) {
     super();
-    this._callback = {};
+    this._formSubmit = null;
     this._data = TaskEdit.parseTaskToData(task);
     this._datepicker = null;
 
@@ -103,7 +103,7 @@ export default class TaskEdit extends SmartView {
   restoreHandlers() {
     this._setInnerHandlers();
     this._setDatepicker();
-    this.setFormSubmitHandler(this._callback.formSubmit);
+    this.setFormSubmitHandler(this._formSubmit);
   }
 
   _setDatepicker() {
@@ -196,11 +196,11 @@ export default class TaskEdit extends SmartView {
 
   _formSubmitHandler(evt) {
     evt.preventDefault();
-    this._callback.formSubmit(TaskEdit.parseDataToTask(this._data));
+    this._formSubmit(TaskEdit.parseDataToTask(this._data));
   }
 
   setFormSubmitHandler(callback) {
-    this._callback.formSubmit = callback;
+    this._formSubmit = callback;
     this.getElement()
       .querySelector(`form`)
       .addEventListener(`submit`, this._formSubmitHandler);
