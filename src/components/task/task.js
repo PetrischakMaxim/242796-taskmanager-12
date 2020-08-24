@@ -1,12 +1,10 @@
-import {isTaskExpired, isTaskRepeating, humanizeTaskDueDate} from "../../utils/utils.js";
+import {isTaskExpired, isTaskRepeating, formatTaskDueDate} from "../../utils/utils.js";
 import AbstractView from "../abstract.js";
 
 export const createTaskCardTemplate = (task) => {
   const {color, description, dueDate, repeating, isArchive, isFavorite} = task;
 
-  const date = dueDate !== null
-    ? humanizeTaskDueDate(dueDate)
-    : ``;
+  const date = formatTaskDueDate(dueDate);
 
   const repeatClassName = isTaskRepeating(repeating)
     ? `card--repeat`
