@@ -1,4 +1,4 @@
-import {isTaskExpired, isTaskRepeating, formatTaskDueDate} from "../../utils/utils.js";
+import {isTaskExpired, isTaskRepeating, formatTaskDueDate} from "../../utils/date-utils.js";
 import AbstractView from "../abstract.js";
 
 export const createTaskCardTemplate = (task) => {

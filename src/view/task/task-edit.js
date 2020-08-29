@@ -1,6 +1,6 @@
 import SmartView from "../smart.js";
 import {BLANK_TASK} from "../../const.js";
-import {isTaskRepeating} from "../../utils/utils.js";
+import {isTaskRepeating} from "../../utils/date-utils.js";
 import {createTaskEditColorsTemplate} from "./task-edit-colors.js";
 import {createTaskEditDateTemplate} from "./task-edit-date.js";
 import {createTaskEditRepeatingTemplate} from "./task-edit-repeating.js";
@@ -74,11 +74,12 @@ const createTaskEditTemplate = (data) => {
 export default class TaskEdit extends SmartView {
   constructor(task = BLANK_TASK) {
     super();
-    this._formSubmit = null;
+
     this._data = TaskEdit.parseTaskToData(task);
     this._datepicker = null;
 
     this._formSubmitHandler = this._formSubmitHandler.bind(this);
+    this._formDeleteClickHandler = this._formDeleteClickHandler.bind(this);
     this._descriptionInputHandler = this._descriptionInputHandler.bind(this);
     this._dueDateToggleHandler = this._dueDateToggleHandler.bind(this);
     this._dueDateChangeHandler = this._dueDateChangeHandler.bind(this);
@@ -86,14 +87,29 @@ export default class TaskEdit extends SmartView {
     this._repeatingChangeHandler = this._repeatingChangeHandler.bind(this);
     this._colorChangeHandler = this._colorChangeHandler.bind(this);
 
+    this._formSubmit = null;
+    this._deleteClick = null;
+
     this._setInnerHandlers();
     this._setDatepicker();
   }
 
+  removeElement() {
+    super.removeElement();
+
+    if (this._datepicker) {
+      this._datepicker.destroy();
+      this._datepicker = null;
+    }
+  }
+
   reset(task) {
-    this.updateData(
-        TaskEdit.parseTaskToData(task)
-    );
+    this.updateData(TaskEdit.parseTaskToData(task));
+
+    this._setInnerHandlers();
+    this._setDatepicker();
+    this.setFormSubmitHandler(this._formSubmit);
+    this.setDeleteClickHandler(this._deleteClick);
   }
 
   getTemplate() {
@@ -197,6 +213,18 @@ export default class TaskEdit extends SmartView {
   _formSubmitHandler(evt) {
     evt.preventDefault();
     this._formSubmit(TaskEdit.parseDataToTask(this._data));
+  }
+
+  _formDeleteClickHandler(evt) {
+    evt.preventDefault();
+    this._deleteClick(TaskEdit.parseDataToTask(this._data));
+  }
+
+  setDeleteClickHandler(callback) {
+    this._deleteClick = callback;
+    this.getElement()
+      .querySelector(`.card__delete`)
+      .addEventListener(`click`, this._formDeleteClickHandler);
   }
 
   setFormSubmitHandler(callback) {
