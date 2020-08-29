@@ -23,4 +23,4 @@ const boardPresenter = new BoardPresenter(siteMainElement, tasksModel);
 render(siteHeaderElement, new MenuView());
 render(siteMainElement, new FilterView(filters));
 
-boardPresenter.init(tasks);
+boardPresenter.init();
