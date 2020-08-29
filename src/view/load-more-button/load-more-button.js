@@ -16,15 +16,15 @@ export default class LoadMoreButton extends AbstractView {
     return createLoadMoreButtonTemplate();
   }
 
-  _clickHandler(evt) {
-    evt.preventDefault();
-    this._onClick();
-  }
-
   setClickHandler(callback) {
     this._onClick = callback;
     this.getElement()
       .addEventListener(`click`, this._clickHandler);
+  }
+
+  _clickHandler(evt) {
+    evt.preventDefault();
+    this._onClick();
   }
 
 }
