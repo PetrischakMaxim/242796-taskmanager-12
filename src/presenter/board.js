@@ -11,17 +11,18 @@ import {TASK_COUNT_PER_STEP, SortType} from '../const.js';
 
 export default class Board {
 
-  constructor(boardContainer) {
+  constructor(boardContainer, tasksModel) {
+    this._tasksModel = tasksModel;
     this._boardContainer = boardContainer;
     this._renderedTaskCount = TASK_COUNT_PER_STEP;
     this._currenSortType = SortType.DEFAULT;
     this._taskPresenter = {};
 
-    this._boardComponent = new TaskBoardView();
-    this._sortComponent = new SortView();
-    this._taskListComponent = new TaskListView();
-    this._noTaskComponent = new NoTaskView();
-    this._loadMoreButtonComponent = new LoadMoreButtonView();
+    this._boardView = new TaskBoardView();
+    this._sortView = new SortView();
+    this._taskListView = new TaskListView();
+    this._noTaskView = new NoTaskView();
+    this._loadMoreButtonView = new LoadMoreButtonView();
 
     this._handleTaskChange = this._handleTaskChange.bind(this);
     this._handleModeChange = this._handleModeChange.bind(this);
@@ -33,10 +34,14 @@ export default class Board {
     this._boardTasks = [...boardTasks];
     this._sourcedBoardTasks = [...boardTasks];
 
-    render(this._boardContainer, this._boardComponent);
-    render(this._boardComponent, this._taskListComponent);
+    render(this._boardContainer, this._boardView);
+    render(this._boardView, this._taskListView);
 
     this._renderBoard();
+  }
+
+  _getTasks() {
+    return this._tasksModel.getTasks();
   }
 
   _handleModeChange() {
@@ -77,8 +82,8 @@ export default class Board {
   }
 
   _renderSort() {
-    render(this._boardComponent, this._sortComponent, RenderPosition.AFTERBEGIN);
-    this._sortComponent.setSortTypeChangeHandler(this._handleSortTypeChange);
+    render(this._boardView, this._sortView, RenderPosition.AFTERBEGIN);
+    this._sortView.setSortTypeChangeHandler(this._handleSortTypeChange);
   }
 
   _clearTaskList() {
@@ -90,7 +95,7 @@ export default class Board {
   }
 
   _renderTask(task) {
-    const taskPresenter = new TaskPresenter(this._taskListComponent, this._handleTaskChange, this._handleModeChange);
+    const taskPresenter = new TaskPresenter(this._taskListView, this._handleTaskChange, this._handleModeChange);
     taskPresenter.init(task);
     this._taskPresenter[task.id] = taskPresenter;
   }
@@ -102,25 +107,25 @@ export default class Board {
   }
 
   _renderNoTasks() {
-    render(this._boardComponent, this._noTaskComponent, RenderPosition.AFTERBEGIN);
+    render(this._boardView, this._noTaskView, RenderPosition.AFTERBEGIN);
   }
 
   _handleLoadMoreButtonClick() {
 
-    this._loadMoreButtonComponent.setClickHandler(() => {
+    this._loadMoreButtonView.setClickHandler(() => {
       this._renderTasks(this._renderedTaskCount, this._renderedTaskCount + TASK_COUNT_PER_STEP);
 
       this._renderedTaskCount += TASK_COUNT_PER_STEP;
 
       if (this._renderedTaskCount >= this._boardTasks.length) {
-        remove(this._loadMoreButtonComponent);
+        remove(this._loadMoreButtonView);
       }
     });
   }
 
   _renderLoadMoreButton() {
-    render(this._boardComponent, this._loadMoreButtonComponent);
-    this._loadMoreButtonComponent.setClickHandler(this._handleLoadMoreButtonClick);
+    render(this._boardView, this._loadMoreButtonView);
+    this._loadMoreButtonView.setClickHandler(this._handleLoadMoreButtonClick);
   }
 
   _renderTaskList() {
