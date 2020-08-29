@@ -1,3 +1,5 @@
+import he from "he";
+
 import SmartView from "../smart.js";
 import {BLANK_TASK} from "../../const.js";
 import {isTaskRepeating} from "../../utils/date-utils.js";
@@ -45,7 +47,7 @@ const createTaskEditTemplate = (data) => {
               class="card__text"
               placeholder="Start typing your text here..."
               name="text"
-            >${description}</textarea>
+            >${he.encode(description)}</textarea>
           </label>
         </div>
         <div class="card__settings">
