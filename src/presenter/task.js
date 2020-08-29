@@ -1,5 +1,5 @@
-import TaskView from "../components/task/task.js";
-import TaskEditView from "../components/task/task-edit.js";
+import TaskView from "../view/task/task.js";
+import TaskEditView from "../view/task/task-edit.js";
 
 import {render, replace, remove} from "../utils/dom-utils.js";
 

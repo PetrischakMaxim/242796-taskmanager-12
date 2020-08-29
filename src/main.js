@@ -1,5 +1,5 @@
-import MenuView from "./components/menu/menu.js";
-import FilterView from "./components/filter/filter.js";
+import MenuView from "./view/menu/menu.js";
+import FilterView from "./view/filter/filter.js";
 
 import {generateTask} from "./mock/task.js";
 import {generateFilters} from "./mock/filter.js";

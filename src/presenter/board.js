@@ -1,9 +1,9 @@
-import TaskBoardView from "../components/task/task-board.js";
-import TaskListView from "../components/task/task-list.js";
-import NoTaskView from "../components/task/no-task.js";
+import TaskBoardView from "../view/task/task-board.js";
+import TaskListView from "../view/task/task-list.js";
+import NoTaskView from "../view/task/no-task.js";
 import TaskPresenter from "./task.js";
-import SortView from "../components/sort/sort.js";
-import LoadMoreButtonView from "../components/load-more-button/load-more-button.js";
+import SortView from "../view/sort/sort.js";
+import LoadMoreButtonView from "../view/load-more-button/load-more-button.js";
 
 import {sortTaskUp, sortTaskDown, updateItem} from "../utils/utils.js";
 import {render, RenderPosition, remove} from "../utils/dom-utils.js";
